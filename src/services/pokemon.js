@@ -1,16 +1,16 @@
-import {pokeMunger} from '../utils/helpers';
+import { pokeMunger } from "../utils/helpers";
 
 const favPokemon = [
-  'charizard',
-  'typhlosion',
-  'blaziken',
-  'mewtwo',
-  'suicune',
-  'pidgeot',
-  'golduck',
-  'gardevoir',
-  'ninetales',
-  'houndoom',
+  "charizard",
+  "typhlosion",
+  "blaziken",
+  "mewtwo",
+  "suicune",
+  "pidgeot",
+  "golduck",
+  "gardevoir",
+  "ninetales",
+  "houndoom",
 ];
 
 export const fetchPokemon = async () => {
@@ -36,27 +36,30 @@ export const fetchPokemon = async () => {
   return pokemonList;
 };
 
-export const fetchSearchPokemon = (pokemonName) => {
+export async function fetchSearchPokemon(pokemonName) {
   const lowerCaseName = pokemonName.toLowerCase();
-  return fetch(
+  return await fetch(
     `https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${lowerCaseName}`
   )
     .then((data) => data.json())
     .then((pokemonData) => {
-      const {results} = pokemonData;
+      const { results } = pokemonData;
       const pokemonResults = results.map((pokemon) => pokeMunger(pokemon));
+      console.log(pokemonResults, "pokemonjs");
       return pokemonResults;
     });
-};
+}
 
 export const fetchTypes = async () => {
-  const res = fetch(`https://pokedex-alchemy.herokuapp.com/api/pokedex/types`);
+  const res = await fetch(
+    `https://pokedex-alchemy.herokuapp.com/api/pokedex/types`
+  );
 
-  const pokemonTypes = res.json();
+  const pokemonTypes = await res.json();
 
   // get random types
   const randomTypes = pokemonTypes
-    .map((pokemonType) => ({type: pokemonType.type}))
+    .map((pokemonType) => ({ type: pokemonType.type }))
     .sort(() => 0.5 - Math.random())
     .slice(0, 5);
   return randomTypes;

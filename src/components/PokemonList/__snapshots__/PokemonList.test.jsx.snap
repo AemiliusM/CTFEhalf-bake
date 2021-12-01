@@ -4,6 +4,7 @@ exports[`displays a list of pokemon 1`] = `
 <ul
   aria-label="pokemonList"
   class="pokemonList"
+  name="pokemonList"
 >
   <li
     class="listItem"
