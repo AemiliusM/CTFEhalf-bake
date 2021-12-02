@@ -18,16 +18,14 @@ export default function Compendium() {
   const [selectedType, setSelectedType] = useState("all");
 
   //TODO 😖 help!
-  if (pokemons.count === 0) {
-    useEffect(() => {
-      const getPokemon = async () => {
-        const pokemonList = await fetchPokemon();
-        setPokemons(pokemonList);
-        setLoading(false);
-      };
-      getPokemon();
-    }, []);
-  }
+  useEffect(() => {
+    const getPokemon = async () => {
+      const pokemonList = await fetchPokemon();
+      setPokemons(pokemonList);
+      setLoading(false);
+    };
+    getPokemon();
+  }, []);
 
   //TODO 😖 help!
   useEffect(() => {
